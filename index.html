@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+
+    <head>
+
+        <title>Python Calculator</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="keywords" content="html, javascript, scrapping">
+        <meta name="description" content="Scrapping Page">
+        <meta name="author" content="Jose Teotonio (teonett@gmail.com)">
+
+        <link rel="stylesheet" href="./css/styles.css">
+
+        <script type="text/javascript" src="./js/brython.js"></script>
+    </head>
+
+    <body onload="brython()">
+
+        <header><h3>Python Calculator</h3></header>
+
+        <div></div>
+
+        <script type="text/python">
+            from browser import document, html
+
+            calc = html.TABLE()
+            calc <= html.TR(html.TH(html.DIV("0", id="result"), colspan=3) + html.TD("C"))
+            lines = ["789/", "456*", "123-", "0.=+"]
+            
+            calc <= (html.TR(html.TD(x) for x in line) for line in lines)
+            
+            document <= calc
+            
+            result = document["result"] # direct acces to an element by its id
+            
+            def action(event):
+
+                element = event.target
+      
+                value = element.text
+      
+                if value not in "=C":
+                    if result.text in ["0", "error"]:
+                        result.text = value
+                    else:
+                        result.text = result.text + value
+                elif value == "C":
+                    result.text = "0"
+                elif value == "=":
+                    try:
+                        result.text = eval(result.text)
+                    except:
+                        result.text = "error"
+            
+            for button in document.select("td"):
+                button.bind("click", action)
+                
+        </script>
+
+        <footer>&copy; 2020 - Jose Teotonio - teonett@gmail.com</footer>
+
+    </body>
+
+</html>

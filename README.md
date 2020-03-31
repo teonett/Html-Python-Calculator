@@ -1,5 +1,5 @@
 # Html Python Calculator
-Simple web calculator using HTML + Python (Brython)
+Simple web calculator using HTML + Python (https://brython.info)
 
 <img src="https://github.com/teonett/Html-Python-Calculator/blob/master/img/Calculator001.png">
 
